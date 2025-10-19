@@ -1,4 +1,5 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -37,6 +38,16 @@ export class Product {
         price4: number;
     
     
+    @ManyToOne(
+        () => User,
+        (user) => user.products,
+        {onDelete: 'CASCADE'}
+    ) 
+    user: User;
+
+    @Column('uuid')
+    userId: string;
+
         @BeforeInsert()
         checkSlugInsert() {
             

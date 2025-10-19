@@ -1,5 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { IsEmail } from 'class-validator';
+import { Product } from "src/products/entities/product.entity";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 
 
  @Entity('users')
@@ -35,6 +36,12 @@ import { IsEmail } from 'class-validator';
         default:['user']
     })
     roles: string[];
+
+    @OneToMany(
+        () => Product,
+        (product) => product.user
+    )
+    products: Product[]
 
     @BeforeInsert()
     checkFieldsBeforeInsert() {

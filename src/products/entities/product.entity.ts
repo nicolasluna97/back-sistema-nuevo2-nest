@@ -41,4 +41,6 @@ export class Product {
         checkSlugInsert() {
             
         }
+
+        
 }

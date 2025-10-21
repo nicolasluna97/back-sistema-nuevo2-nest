@@ -4,10 +4,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 1 minuto en milisegundos
+      limit: 5, // 5 intentos por minuto
+    }]),
 
     TypeOrmModule.forRoot({
       type:'postgres',
@@ -25,6 +32,12 @@ import { AuthModule } from './auth/auth.module';
     CommonModule,
 
     AuthModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard, // Aplica rate limiting global
+    },
   ],
 })
 export class AppModule {}

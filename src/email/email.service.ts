@@ -17,10 +17,14 @@ export class EmailService {
 
   async sendVerificationCode(email: string, code: string) {
     const fromEmail = this.configService.get<string>('SENDGRID_FROM_EMAIL');
+    const fromName = this.configService.get<string>('SENDGRID_FROM_NAME') || 'Administrador';
 
     const msg = {
       to: email,
-      from: fromEmail,
+      from: {
+        email: fromEmail,
+        name: fromName,
+      },
       subject: 'Tu código de verificación',
       text: `Tu código de verificación es: ${code}`,
       html: `

@@ -14,8 +14,8 @@ import { CustomersModule } from './customers/customers.module';
     ConfigModule.forRoot(),
 
     ThrottlerModule.forRoot([{
-      ttl: 60000, // 1 minuto en milisegundos
-      limit: 5, // 5 intentos por minuto
+      ttl: 60, // 1 minuto en milisegundos
+      limit: 120, // 120 intentos por minuto
     }]),
 
     TypeOrmModule.forRoot({

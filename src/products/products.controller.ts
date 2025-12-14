@@ -13,6 +13,7 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { SkipThrottle } from '@nestjs/throttler';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/decorators';
@@ -30,17 +31,25 @@ export class ProductsController {
   }
 
   @Get()
-  findAll(@Query() paginationDto: PaginationDto, @GetUser() user: User) {
+  @SkipThrottle()
+  findAll(
+    @Query() paginationDto: PaginationDto,
+    @GetUser() user: User
+  ) {
     return this.productsService.findAll(paginationDto, user);
   }
 
   @Get(':term')
-  findOne(@Param('term') term: string, @GetUser() user: User) {
+  @SkipThrottle()
+  findOne(
+    @Param('term') term: string,
+    @GetUser() user: User
+  ) {
     return this.productsService.findOne(term, user);
   }
 
   @Patch(':id')
-  update(
+    update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
     @GetUser() user: User,

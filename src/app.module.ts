@@ -8,6 +8,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AccountModule } from './account/account.module';
 import { CustomersModule } from './customers/customers.module';
+import { MovementsModule } from './movements/movements.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { CustomersModule } from './customers/customers.module';
     CommonModule,
     AuthModule,
     AccountModule,
-    CustomersModule
+    CustomersModule,
+    MovementsModule
   ],
   providers: [
     {

@@ -19,6 +19,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/decorators';
 import { User } from '../auth/entities/user.entity';
 import { DecreaseStockDto } from './dto/decrease-stock.dto';
+import { DecreaseStockWithMovementDto } from './dto/decrease-stock-movement.dto';
 
 @Controller('products')
 @UseGuards(AuthGuard()) // Proteger todas las rutas de productos
@@ -60,7 +61,7 @@ export class ProductsController {
   @Patch(':id/decrease-stock')
   decreaseStock(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() dto: DecreaseStockDto,
+    @Body() dto: DecreaseStockWithMovementDto,
     @GetUser() user: User,
   ) {
     return this.productsService.decreaseStock(id, dto.quantity, user);

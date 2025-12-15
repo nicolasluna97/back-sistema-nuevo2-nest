@@ -4,6 +4,7 @@ import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
 import { Product } from './entities/product.entity';
 import { AuthModule } from '../auth/auth.module';
+import { MovementsModule } from 'src/movements/movements.module';
 
 @Module({
   controllers: [ProductsController],
@@ -15,6 +16,7 @@ import { AuthModule } from '../auth/auth.module';
   exports: [
     ProductsService,
     TypeOrmModule,
+    MovementsModule
   ]
 })
 export class ProductsModule {}

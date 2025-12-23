@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AccountModule } from './account/account.module';
 import { CustomersModule } from './customers/customers.module';
 import { MovementsModule } from './movements/movements.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { MovementsModule } from './movements/movements.module';
     AuthModule,
     AccountModule,
     CustomersModule,
-    MovementsModule
+    MovementsModule,
+    StatisticsModule
   ],
   providers: [
     {

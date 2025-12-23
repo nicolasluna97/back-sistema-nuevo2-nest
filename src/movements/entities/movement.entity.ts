@@ -29,13 +29,13 @@ export class Movement {
   @Column('int')
   priceKey: 1 | 2 | 3 | 4;
 
-  // futuro
   @Column('text', { nullable: true })
   status: string | null;
 
   @Column('text', { nullable: true })
   employee: string | null;
 
-  @CreateDateColumn()
+  // CLAVE:
+  @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 }
